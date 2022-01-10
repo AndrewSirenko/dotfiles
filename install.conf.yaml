@@ -1,0 +1,24 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.bash:
+    ~/.bash_profile:
+    ~/.bashrc:
+    ~/.dotfiles: ''
+    ~/.shell:    
+    ~/.vim:
+    ~/.vimrc:
+    ~/.zsh:
+    ~/.zshrc:
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
