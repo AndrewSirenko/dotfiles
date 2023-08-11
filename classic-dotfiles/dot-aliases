@@ -1,8 +1,11 @@
 # Better defaults
 alias cat='bat -p'
+alias grep='nocorrect grep --color=auto'
+alias ls='ls --color=auto'
+alias l='ls --color=auto'
+alias ll='ls --color=auto -al'
 
 # git
-alias g='git'
 alias gs='git status -sb'
 alias gst='git stash --all'
 alias ga='git add'
@@ -10,11 +13,15 @@ alias gc='git commit'
 alias gca='git commit --amend --no-edit'
 alias gco='git checkout'
 alias gcb='git checkout -b'
-alias gd='batdiff'
+alias gd='git diff'
 alias gf='git fetch --all --prune'
 alias gl='git log'
 alias gll='git log --abbrev-commit --no-merges --decorate --format=format:'\''%C(bold blue)%h%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)%n'\'\''         %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%n'\'
 alias gru='git rebase upstream/master'
+alias gp='git fetch --all --prune; git rebase upstream/master'
+
+# Grep
+alias g='grep'
 
 # Kubernetes
 alias kg='kubectl get'
@@ -33,3 +40,55 @@ alias ksd='kubectl --namespace kube-system describe'
 # cd improvements
 alias cdr='cd $(git rev-parse --show-toplevel)'
 alias cdw='cd $HOME/workplace'
+
+### From @jessfraz/dotfiles
+# IP addresses
+alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias ips="sudo ifconfig -a | grep -o 'inet6\\? \\(addr:\\)\\?\\s\\?\\(\\(\\([0-9]\\+\\.\\)\\{3\\}[0-9]\\+\\)\\|[a-fA-F0-9:]\\+\\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	# shellcheck disable=SC2139,SC2140
+	alias "$method"="lwp-request -m \"$method\""
+done
+
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# copy working directory
+alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
+
+# untar
+alias untar='tar xvf'
+
+# Pipe my public key to my clipboard.
+alias pubkey="more ~/.ssh/id_ed25519.pub | xclip -selection clipboard | echo '=> Public key copied to pasteboard.'"
+
+# Pipe my private key to my clipboard.
+alias prikey="more ~/.ssh/id_ed25519 | xclip -selection clipboard | echo '=> Private key copied to pasteboard.'"
+
+# Linux specific aliases, work on both MacOS and Linux.
+pbcopy() {
+	stdin=$(</dev/stdin);
+	pbcopy="$(which pbcopy)";
+	if [[ -n "$pbcopy" ]]; then
+		echo "$stdin" | "$pbcopy"
+	else
+		echo "$stdin" | xclip -selection clipboard
+	fi
+}
+pbpaste() {
+	pbpaste="$(which pbpaste)";
+	if [[ -n "$pbpaste" ]]; then
+		"$pbpaste"
+	else
+		xclip -selection clipboard
+	fi
+}
