@@ -34,6 +34,7 @@ brew 'noahgorstein/tap/jqp'
 brew 'yq'
 brew 'fd'
 brew 'bat'
+brew 'bat-extras'
 brew 'xh'
 brew 'fzf'
 

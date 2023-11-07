@@ -10,6 +10,7 @@ if status is-interactive
     ### Abbreviations
     # Better defaults
     abbr sed gsed
+    abbr cat bat -p
 
     # git (TODO move most to .gitconfig)
     abbr g git
@@ -17,7 +18,7 @@ if status is-interactive
     abbr ga git add
     abbr gc git commit
     abbr gca git commit --amend --no-edit
-    abbr gd git diff
+    abbr gd batdiff
     abbr gf git fetch
     abbr gl git log
 
