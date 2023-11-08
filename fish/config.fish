@@ -3,6 +3,9 @@ if status is-interactive
     fish_vi_key_bindings
 
     ### Environment Variables
+    # Global (via shell-agnostic workaround)
+    function setenv; set -gx $argv; end
+    source ~/.env
 
     ### Path
     fish_add_path /opt/homebrew/bin/
