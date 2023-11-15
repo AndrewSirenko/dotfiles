@@ -15,25 +15,27 @@ brew 'findutils'
 # Install more recent versions of some OS X tools
 brew 'homebrew/dupes/grep'
 
-# Install Binaries
+# S-tier tools
 brew 'awscli'
 brew 'git'
 brew 'tree'
-brew 'node'
 brew 'trash'
 brew 'wget'
 brew 'ripgrep'
-brew 'aws-nuke'
 brew 'fish'
+brew 'fisher'
 brew 'jq'
-brew 'noahgorstein/tap/jqp'
 brew 'yq'
 brew 'fd'
 brew 'bat'
 brew 'bat-extras'
-brew 'xh'
 brew 'fzf'
 brew 'stow'
+
+# B-tier tools
+brew 'aws-nuke'
+brew 'noahgorstein/tap/jqp'
+brew 'xh'
 
 # Git extensions
 brew 'git-extras'
@@ -48,6 +50,7 @@ brew 'hub'
 # Languages
 brew 'go'
 brew 'pyenv'
+brew 'node'
 
 # Containers-related
 brew 'arkade'
