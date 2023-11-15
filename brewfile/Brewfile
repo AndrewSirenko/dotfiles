@@ -6,9 +6,6 @@ tap "buo/cask-upgrade"
 tap "homebrew/cask-fonts"
 tap "tap noahgorstein/tap"
 
-# Make sure apps get installed in system Applications dir
-cask_args appdir: '/Applications'
-
 # Install GNU core utilities (those that come with OS X are outdated)
 brew 'coreutils'
 
@@ -25,7 +22,6 @@ brew 'tree'
 brew 'node'
 brew 'trash'
 brew 'wget'
-brew 'gh'
 brew 'ripgrep'
 brew 'aws-nuke'
 brew 'fish'
@@ -37,28 +33,25 @@ brew 'bat'
 brew 'bat-extras'
 brew 'xh'
 brew 'fzf'
+brew 'stow'
+
+# Git extensions
+brew 'git-extras'
+brew 'git-lfs'
+brew 'git-absorb'
+brew 'git-branchless'
+
+# Github
+brew 'gh'
+brew 'hub'
 
 # Languages
-brew 'goenv'
+brew 'go'
 brew 'pyenv'
 
 # Containers-related
 brew 'arkade'
 brew 'docker'
 
-# Apps
-# TODO add mac only section or brewfile
-brew "mas"
-cask 'iterm2'
-cask 'skype'
-cask 'slack'
-
-# Quicklook
-cask 'qlcolorcode'
-cask 'qlmarkdown'
-cask 'quicklook-json'
-cask 'quicklook-csv'
-cask 'qlstephen'
-
-# Fonts
-
+# Install $OSTYPE.$PLATFORM specific packages
+main ./Brewfile.$OSTYPE
