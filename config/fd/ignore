@@ -1,0 +1,9 @@
+*.bak
+.git
+
+**/logs/
+**/env/
+**/build/
+**/logs/**
+**/env/**
+**/build/**
