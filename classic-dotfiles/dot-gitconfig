@@ -1,0 +1,73 @@
+[alias]
+    # Note: I prefer fish/zsh abbreviations over git aliases...
+
+	# View the current working tree status using the short format and show branches
+	s = status -sb
+
+	# Commit aliases
+	c = commit -m
+	cw = commit -m "wip"
+	cf = git commit --fixup
+
+
+[commit]
+    # See diffs when editing commit message
+	verbose = true
+
+[core]
+	excludesfile = ~/.gitignore_global
+
+[fetch]
+    # cleanup method that deletes outdated remote references in your .git directory
+    prune = true
+    recurseSubmodules = on-demand
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[include]
+    # TODO include workplace-level-config
+    # path = ~/.config/local-configs/.gitconfig_local
+
+[init]
+	defaultBranch = main
+
+[merge]
+	tool = vimdiff
+	conflictStyle = diff3
+
+[pull]
+	rebase = true
+
+[rebase]
+	autosquash = true
+
+[user]
+    # TODO override this in system gitconfig, see [Different Git configuration for projects](https://stackoverflow.com/questions/8801729/is-it-possible-to-have-different-git-configuration-for-different-projects)
+	name = Drew Sirenko
+	email = 68304519+AndrewSirenko@users.noreply.github.com
+
+### URL shorthands
+
+[url "git@github.com:"]
+
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+
+	insteadOf = "gist:"
