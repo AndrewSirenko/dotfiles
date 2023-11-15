@@ -17,10 +17,11 @@ if status is-interactive
 
     # git (TODO move most to .gitconfig)
     abbr g git
-    abbr gs git status
+    abbr gs git status -sb
     abbr ga git add
     abbr gc git commit
-    abbr gca git commit --amend --no-edit
+    abbr gca git commit --amend
+    abbr gcan git commit --amend --no-edit
     abbr gd batdiff
     abbr gf git fetch
     abbr gl git log
@@ -39,4 +40,9 @@ if status is-interactive
 
     # Better cd using fzf (adapted from nixcast)
     abbr f cd_with_fzf
+
+    ### Completions?
+    # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
+    complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+
 end
