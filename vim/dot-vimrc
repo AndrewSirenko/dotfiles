@@ -1,0 +1,54 @@
+" TODO split up into vim-only and nvim-compatible, source the vim-only"
+" Set relative line-numbers
+set nu
+set relativenumber
+
+" 4-spaced indents
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+set smartindent
+
+set nowrap
+
+" No swap, but have an undofile for undotree (TODO confirm works)
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+" No keeping highlight during search, but yes incremental search
+set nohlsearch
+set incsearch
+
+" Ignore case in search until a cap appears
+set ignorecase
+set smartcase
+
+set termguicolors
+
+" Cursor always stays 6 lines within viewable file when scrolling
+set scrolloff=6
+
+set updatetime=50
+
+syntax on
+
+"Show vi command/count you're typing
+set showcmd
+
+" Display wildmatches in status line
+set wildmenu
+
+" For regex in search, turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" Fix the difficult-to-read default setting for diff text highlighting.  The
+" bang (!) is required since we are overwriting the DiffText setting. The highlighting
+" for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
+highlight! link DiffText Todo
