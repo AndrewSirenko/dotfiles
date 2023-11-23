@@ -52,3 +52,6 @@ set showmatch
 " bang (!) is required since we are overwriting the DiffText setting. The highlighting
 " for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
 highlight! link DiffText Todo
+
+" Sensible backspace
+set backspace=indent,eol,start
