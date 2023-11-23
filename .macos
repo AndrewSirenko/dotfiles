@@ -35,6 +35,13 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
+# Misc                                                                        #
+###############################################################################
+
+# Disable automatically rearranging spaces based on use
+defaults write com.apple.dock "mru-spaces" -bool "false"
+
+###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 
@@ -61,7 +68,7 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 
 # Stop iTunes from responding to the keyboard media keys
