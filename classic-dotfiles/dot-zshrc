@@ -16,7 +16,7 @@ include () {
 # Source some zsh plugins
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/etc/profile.d/z.sh
+source $(brew --prefix)/etc/profile.d/z.sh
 
 zstyle ':completion:*' menu select
 
