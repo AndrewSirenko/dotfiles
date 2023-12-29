@@ -3,13 +3,13 @@
 set -euo pipefail
 
 # Prep dotfile directories
-mkdir -p "~/.config"
-mkdir -p "~/.config/fish"
-mkdir -p "~/.config/fish/functions"
-mkdir -p "~/.config/local-configs"
-mkdir -p "~/brewfile"
-mkdir -p "~/.tmux"
-mkdir -p "~/.vim/.undodir"
+mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.config/fish"
+mkdir -p "$HOME/.config/fish/functions"
+mkdir -p "$HOME/.config/local-configs"
+mkdir -p "$HOME/brewfile"
+mkdir -p "$HOME/.tmux"
+mkdir -p "$HOME/.vim/.undodir"
 
 # GNU Stow (See [Dotfile stewardship](https://rednafi.com/misc/dotfile_stewardship_for_the_indolent/))
 stow -v -R -t ~/brewfile --dotfiles brewfile
