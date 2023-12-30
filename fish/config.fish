@@ -21,6 +21,7 @@ if status is-interactive
     # Better defaults
     abbr sed gsed
     abbr cat bat -p
+    abbr v $EDITOR
 
     # git (TODO move most to .gitconfig)
     abbr g git
@@ -63,6 +64,8 @@ if status is-interactive
 
     # bash's !!
     abbr -a !! --position anywhere --function last_history_item
+
+    zoxide init fish | source
 
     ### Completions?
     # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
