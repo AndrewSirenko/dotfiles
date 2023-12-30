@@ -32,6 +32,12 @@ brew 'bat-extras'
 brew 'fzf'
 brew 'stow'
 
+# zsh plugins
+brew 'zsh-autosuggestions'
+brew 'zsh-syntax-highlighting'
+brew 'olets/tap/zsh-abbr'
+brew 'zoxide'
+
 # B-tier tools
 brew 'aws-nuke'
 brew 'noahgorstein/tap/jqp'
