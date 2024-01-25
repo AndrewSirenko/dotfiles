@@ -1,0 +1,35 @@
+# Better defaults
+alias cat='bat -p'
+
+# git
+alias g='git'
+alias gs='git status -sb'
+alias ga='git add'
+alias gc='git commit'
+alias gca='git commit --amend --only'
+alias gcan='git commit --amend --no-edit'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gd='batdiff'
+alias gf='git fetch'
+alias gfu='git fetch upstream'
+alias gl='git log'
+alias gll='git log --abbrev-commit --no-merges --decorate --format=format:'\''%C(bold blue)%h%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)%n'\'\''         %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%n'\'
+
+# Kubernetes
+alias kg='kubectl get'
+alias kgp='kubectl get pods --all-namespaces'
+alias kn='kubens'
+alias kd='kubectl describe'
+alias kl='kubectl logs -f'
+alias k='kubectl'
+alias kc='kubectl'
+alias ka='kubectl apply -f'
+alias kex='kubectl exec -it'
+alias ks='kubectl --namespace kube-system'
+alias ksl='kubectl --namespace kube-system logs -f'
+alias ksd='kubectl --namespace kube-system describe'
+
+# cd improvements
+alias cdr='cd $(git rev-parse --show-toplevel)'
+alias cdw='cd $HOME/workplace'
