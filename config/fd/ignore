@@ -1,6 +1,7 @@
 *.bak
 .git
 
+**/bin/**
 **/logs/
 **/env/
 **/build/
