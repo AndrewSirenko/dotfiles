@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+# Include helper fcn
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
 # Local config
-[[ ! -f ~/.config/local-configs/local.zsh ]] || source ~/.config/local-configs/local.zsh
+include "$HOME/.config/local-configs/local.zsh"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -10,10 +15,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Include helper fcn
-include () {
-    [[ -f "$1" ]] && source "$1"
-}
+
+# from: https://unix.stackexchange.com/questions/389881/history-isnt-preserved-in-zsh
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000000
+setopt SHARE_HISTORY # or INC_APPEND_HISTORY_TIME
 
 # Enter vim mode with <esc>
 set -o vi
@@ -23,12 +30,11 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-abbr/zsh-abbr.zsh
 eval "$(zoxide init zsh)"
-
 zstyle ':completion:*' menu select
+include "$HOME/.fzf.zsh"
 
 # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
 PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Case insensitive completions
 autoload bashcompinit && bashcompinit
