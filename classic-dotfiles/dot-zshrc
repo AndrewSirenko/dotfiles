@@ -58,6 +58,17 @@ function aar() {
   export AWS_SESSION_TOKEN=$(echo $OUT | jq -r '.Credentials''.SessionToken');
 }
 
+# Aws unset env vars (If I'm doing role shenanigans)
+ function auenv() {
+	unset AWS_DEFAULT_PROFILE
+    unset AWS_DEFAULT_REGION
+    unset AWS_PROFILE
+    unset AWS_REGION
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+}
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
