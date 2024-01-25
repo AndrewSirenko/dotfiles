@@ -12,7 +12,7 @@ brew install stow
 
 ./symlink.sh
 
-# TODO add p10k zsh theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
 # Install brewfile
 brew bundle install
