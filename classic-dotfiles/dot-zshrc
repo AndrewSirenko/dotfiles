@@ -33,6 +33,8 @@ eval "$(zoxide init zsh)"
 zstyle ':completion:*' menu select
 include "$HOME/.fzf.zsh"
 
+# Paths
+export PATH=$HOME/go/bin:$PATH
 # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
 PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
 
