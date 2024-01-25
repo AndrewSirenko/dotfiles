@@ -3,10 +3,10 @@
 set nu
 set relativenumber
 
-" 4-spaced indents
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+" 2-spaced indents
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 
 set smartindent
@@ -55,3 +55,14 @@ highlight! link DiffText Todo
 
 " Sensible backspace
 set backspace=indent,eol,start
+
+" esc in insert & visual mode
+inoremap kj <esc>
+vnoremap kj <esc>
+inoremap jk <esc>
+vnoremap jk <esc>
+
+" esc in command mode
+cnoremap jk <C-C>
+cnoremap kj <C-C>
+set timeoutlen=500
