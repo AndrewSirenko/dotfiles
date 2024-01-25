@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Local config
 [[ ! -f ~/.config/local-configs/local.zsh ]] || source ~/.config/local-configs/local.zsh
 
@@ -24,6 +26,8 @@ eval "$(zoxide init zsh)"
 
 zstyle ':completion:*' menu select
 
+# Prefer gnu versions over free-bsd versions on mac (e.g. sed)
+PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Case insensitive completions
@@ -34,6 +38,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # aws completions and on-partial auto-prompt
 complete -C "$(brew --prefix)/bin/aws_completer" aws
 export AWS_CLI_AUTO_PROMPT=on-partial
+
+# Aliases
+include "$HOME/.aliases"
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
