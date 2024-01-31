@@ -48,10 +48,15 @@ brew 'git-extras'
 brew 'git-lfs'
 brew 'git-absorb'
 brew 'git-branchless'
+brew 'lazygit'
 
 # Github
 brew 'gh'
 brew 'hub'
+
+# Tmux
+brew 'tmux'
+brew 'tpm'
 
 # Languages
 brew 'go'
