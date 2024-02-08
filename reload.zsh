@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 source "$HOME/.zshrc"
-abbr 
+abbr import-aliases
