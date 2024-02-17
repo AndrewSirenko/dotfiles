@@ -9,6 +9,8 @@
 	cw = commit -m "wip"
 	cf = git commit --fixup
 
+[branch]
+    sort = -committerdate
 
 [commit]
     # See diffs when editing commit message
@@ -16,6 +18,10 @@
 
 [core]
 	excludesfile = ~/.gitignore_global
+
+[diff]
+    colorMoved = default
+    diff-algorithm = histogram
 
 [fetch]
     # cleanup method that deletes outdated remote references in your .git directory
@@ -37,7 +43,10 @@
 
 [merge]
 	tool = vimdiff
-	conflictStyle = diff3
+	conflictStyle = zdiff3
+
+[push]
+    autoSetupRemote = true
 
 [pull]
 	rebase = true
