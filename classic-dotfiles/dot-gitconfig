@@ -5,9 +5,13 @@
 	s = status -sb
 
 	# Commit aliases
+	# Ignore moving blocks of code in blame
+	blame = blame -w -C -C -C
 	c = commit -m
 	cw = commit -m "wip"
 	cf = git commit --fixup
+	# Stash ALL untracked and hidden
+	stash = stash --all
 
 [branch]
     sort = -committerdate
@@ -80,3 +84,6 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+[rerere]
+    # Auto fix merge conflicts that git has seen locally
+	enabled = true
