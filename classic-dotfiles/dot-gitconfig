@@ -11,7 +11,8 @@
 	cw = commit -m "wip"
 	cf = git commit --fixup
 	# Stash ALL untracked and hidden
-	stash = stash --all
+	stash = stash --include-untracked
+	root = rev-parse --show-toplevel
 
 [branch]
     sort = -committerdate
@@ -22,6 +23,11 @@
 
 [core]
 	excludesfile = ~/.gitignore_global
+	pager = delta
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [diff]
     colorMoved = default
@@ -45,6 +51,9 @@
 [init]
 	defaultBranch = main
 
+[interactive]
+    diffFilter = delta --color-only
+
 [merge]
 	tool = vimdiff
 	conflictStyle = zdiff3
@@ -58,12 +67,20 @@
 [rebase]
 	autosquash = true
 
+[rerere]
+    # Auto fix merge conflicts that git has seen locally
+	enabled = true
+
 [user]
     # TODO override this in system gitconfig, see [Different Git configuration for projects](https://stackoverflow.com/questions/8801729/is-it-possible-to-have-different-git-configuration-for-different-projects)
 	name = Drew Sirenko
 	email = 68304519+AndrewSirenko@users.noreply.github.com
 
 ### URL shorthands
+
+[url "git@github.com:AndrewSirenko"]
+
+	insteadOf = "gh:m"
 
 [url "git@github.com:"]
 
@@ -84,6 +101,3 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
-[rerere]
-    # Auto fix merge conflicts that git has seen locally
-	enabled = true
