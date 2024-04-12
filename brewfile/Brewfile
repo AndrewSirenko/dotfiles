@@ -18,6 +18,7 @@ brew 'homebrew/dupes/grep'
 # S-tier tools
 brew 'awscli'
 brew 'git'
+brew 'git-delta'
 brew 'tree'
 brew 'trash'
 brew 'wget'
@@ -60,8 +61,14 @@ brew 'tpm'
 
 # Languages
 brew 'go'
+brew 'golangci-lint'
 brew 'pyenv'
 brew 'node'
+brew 'python'
+
+# Networking
+brew 'mtr'
+brew 'nmap'
 
 # Containers-related
 brew 'arkade'
