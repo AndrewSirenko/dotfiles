@@ -177,6 +177,14 @@ tmpd() {
 	cd "$dir" || exit
 }
 
+grepsed() {
+  local dir="$1"
+  local search="$2"
+  local replacement="$3"
+
+  grep -lR "$search" "$dir" | grep -v '^\.\/\.'| xargs sed -i "s/$search/$replacement/g"
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
