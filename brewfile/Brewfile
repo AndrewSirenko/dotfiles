@@ -73,6 +73,10 @@ brew 'nmap'
 # Containers-related
 brew 'arkade'
 brew 'docker'
+brew 'stern'
+brew 'eksctl'
+brew 'helm'
+brew 'kubectl'
 
 # Install $OSTYPE.$PLATFORM specific packages
 main ./Brewfile.$OSTYPE
