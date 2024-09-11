@@ -5,7 +5,7 @@
 # Include helper fcn
 ## TODO append failed statements to some zshrc.errors log?
 include () {
-    [[ -f "$1" ]] && source "$1"
+    [[ -r "$1" ]] && source "$1"
 }
 
 # Local config
@@ -15,17 +15,11 @@ include "$HOME/.aliases"
 # Plugins (manually installed)
 include "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 include "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+include "$HOME/.zsh/zsh-abbr/zsh-abbr.zsh"
 include "$HOME/.fzf.zsh"
 zstyle ':completion:*' menu select
-# Plugins (brew installed)
-include "$(brew --prefix)/share/zsh-abbr/zsh-abbr.zsh"
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Powerlevel10k instant prompt.
+include "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 ### Settings
 
@@ -46,18 +40,24 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# aws completions and on-partial auto-prompt
-complete -C "$(brew --prefix)/bin/aws_completer" aws
-export AWS_CLI_AUTO_PROMPT=on-partial
-
 ### Paths
 
 # Go
 export PATH="$HOME/go/bin:$PATH"
-# Prefer gnu versions over free-bsd versions on mac (e.g. sed)
-PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+
 # Local bin
 export PATH="$HOME/.local/bin:$PATH"
+
+# If brew installed
+if command -v brew &> /dev/null
+then
+  # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
+  PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+
+  # aws completions and on-partial auto-prompt
+  complete -C "$(brew --prefix)/bin/aws_completer" aws
+  export AWS_CLI_AUTO_PROMPT=on-partial
+fi
 
 ### Functions
 
