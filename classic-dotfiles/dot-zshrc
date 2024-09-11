@@ -56,7 +56,8 @@ export AWS_CLI_AUTO_PROMPT=on-partial
 export PATH="$HOME/go/bin:$PATH"
 # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
 PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/Users/andsirey/.local/bin:$PATH"
+# Local bin
+export PATH="$HOME/.local/bin:$PATH"
 
 ### Functions
 
