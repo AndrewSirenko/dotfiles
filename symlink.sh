@@ -18,6 +18,5 @@ stow -v -R -t ~/brewfile --dotfiles brewfile --adopt
 stow -v -R -t ~/.config --dotfiles config --adopt
 stow -v -R -t ~ --dotfiles classic-dotfiles --adopt
 stow -v -R -t ~ --dotfiles tmux --adopt
-stow -v -R -t ~ --dotfiles zsh --adopt
 stow -v -R -t ~ --dotfiles vim --adopt
 stow -v -R -t ~/.config/fish --dotfiles fish --adopt
