@@ -26,8 +26,8 @@ setopt SHARE_HISTORY # or INC_APPEND_HISTORY_TIME
 set -o vi
 
 # Source some zsh plugins
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source $(brew --prefix)/share/zsh-abbr/zsh-abbr.zsh
 eval "$(zoxide init zsh)"
 zstyle ':completion:*' menu select
@@ -37,6 +37,9 @@ include "$HOME/.fzf.zsh"
 export PATH=$HOME/go/bin:$PATH
 # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
 PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# Add go path from user directory
+PATH="$HOME/go/bin:$PATH"
 
 # Case insensitive completions
 autoload bashcompinit && bashcompinit
@@ -188,3 +191,6 @@ grepsed() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+autoload -U +X bashcompinit && bashcompinit
+export PATH="/Users/andsirey/.local/bin:$PATH"
