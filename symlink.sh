@@ -12,9 +12,10 @@ mkdir -p "$HOME/.tmux"
 mkdir -p "$HOME/.vim/.undodir"
 
 # GNU Stow (See [Dotfile stewardship](https://rednafi.com/misc/dotfile_stewardship_for_the_indolent/))
-stow -v -R -t ~/brewfile --dotfiles brewfile
-stow -v -R -t ~/.config --dotfiles config
-stow -v -R -t ~ --dotfiles classic-dotfiles
-stow -v -R -t ~ --dotfiles tmux
-stow -v -R -t ~ --dotfiles vim
-stow -v -R -t ~/.config/fish --dotfiles fish
+# --adopt makes it so my dotfiles repo reflects conflicted files. Can just `cd .../dotfiles; git checkout HEAD`
+stow -v -R -t ~/brewfile --dotfiles brewfile --adopt
+stow -v -R -t ~/.config --dotfiles config --adopt
+stow -v -R -t ~ --dotfiles classic-dotfiles --adopt
+stow -v -R -t ~ --dotfiles tmux --adopt
+stow -v -R -t ~ --dotfiles vim --adopt
+stow -v -R -t ~/.config/fish --dotfiles fish --adopt
