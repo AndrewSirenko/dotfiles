@@ -12,10 +12,29 @@ include () {
 include "$HOME/.config/local-configs/local.zsh"
 # Aliases
 include "$HOME/.aliases"
-# Plugins (manually installed)
-include "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-include "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-include "$HOME/.zsh/zsh-abbr/zsh-abbr.zsh"
+# Plugins (brew vs manually installed)
+
+# If brew installed
+if command -v brew &> /dev/null
+then
+  BREWPREFIX=$(brew --prefix)
+  # zsh plugins
+  source "$BREWPREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source "$BREWPREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  source "$BREWPREFIX/share/zsh-abbr/zsh-abbr.zsh"
+
+  # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
+  PATH="$BREWPREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
+
+  # aws completions and on-partial auto-prompt
+  complete -C "$$BREWPREFIX/bin/aws_completer" aws
+  export AWS_CLI_AUTO_PROMPT=on-partial
+else
+  include "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  include "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  include "$HOME/.zsh/zsh-abbr/zsh-abbr.zsh"
+fi
+
 include "$HOME/.fzf.zsh"
 zstyle ':completion:*' menu select
 # Powerlevel10k instant prompt.
@@ -47,17 +66,6 @@ export PATH="$HOME/go/bin:$PATH"
 
 # Local bin
 export PATH="$HOME/.local/bin:$PATH"
-
-# If brew installed
-if command -v brew &> /dev/null
-then
-  # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
-  PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-
-  # aws completions and on-partial auto-prompt
-  complete -C "$(brew --prefix)/bin/aws_completer" aws
-  export AWS_CLI_AUTO_PROMPT=on-partial
-fi
 
 ### Functions
 
