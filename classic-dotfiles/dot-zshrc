@@ -14,6 +14,10 @@ include "$HOME/.config/local-configs/local.zsh"
 include "$HOME/.aliases"
 # Plugins (brew vs manually installed)
 
+# Completions
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
 # If brew installed
 if command -v brew &> /dev/null
 then
@@ -27,7 +31,7 @@ then
   PATH="$BREWPREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 
   # aws completions and on-partial auto-prompt
-  complete -C "$$BREWPREFIX/bin/aws_completer" aws
+  complete -C "$BREWPREFIX/bin/aws_completer" aws
   export AWS_CLI_AUTO_PROMPT=on-partial
 else
   include "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -55,8 +59,6 @@ set -o vi
 eval "$(zoxide init zsh)"
 
 # Case insensitive completions
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 ### Paths
@@ -66,6 +68,9 @@ export PATH="$HOME/go/bin:$PATH"
 
 # Local bin
 export PATH="$HOME/.local/bin:$PATH"
+
+# Haskell
+include "$HOME/.ghcup/env" # ghcup-env
 
 ### Functions
 
