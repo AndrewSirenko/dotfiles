@@ -12,7 +12,13 @@ include () {
 include "$HOME/.config/local-configs/local.zsh"
 # Aliases
 include "$HOME/.aliases"
-# Plugins (brew vs manually installed)
+
+# Case insensitive completions
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+#Plugins (brew vs manually installed)
 
 # Completions
 autoload bashcompinit && bashcompinit
@@ -57,9 +63,6 @@ set -o vi
 
 # Source some zsh plugins
 eval "$(zoxide init zsh)"
-
-# Case insensitive completions
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 ### Paths
 
