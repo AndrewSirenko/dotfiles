@@ -69,6 +69,7 @@ brew 'python'
 # Networking
 brew 'mtr'
 brew 'nmap'
+brew 'net-tools'
 
 # Containers-related
 brew 'arkade'
