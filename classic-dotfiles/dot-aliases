@@ -29,8 +29,9 @@ alias gr='git rebase --autosquash'
 alias gfr='git fetch --all --prune; git rebase upstream/master'
 alias gpo='git push origin'
 
-# Grep
+# Common
 alias g='grep'
+alias v='nvim'
 
 # Kubernetes
 alias kg='kubectl get'
