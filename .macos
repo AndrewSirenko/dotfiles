@@ -18,6 +18,8 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
+# Make fn keys act as application keys by default
+defaults write -g com.apple.keyboard.fnState -bool true
 
 ###############################################################################
 # Local differences end                                                       #
