@@ -1,9 +1,15 @@
+# Easy navigation
+alias cdw='cd ~/workplace'
+alias cde='cd ~/workplace/aws-ebs-csi-driver'
+
 # Better defaults
 alias cat='bat -p'
 alias grep='nocorrect grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias ll='ls --color=auto -al'
+alias mkdir='mkdir -p'
+alias chx='chmod u+x'
 
 # git
 alias gs='git status -sb'
@@ -77,6 +83,14 @@ alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
 
 # untar
 alias untar='tar xvf'
+
+# copy current path to system clipboard
+abbr cwd "pwd | eval $CLIPBOARD"
+
+# archives
+abbr tgz 'tar -xvzf' # extract .tar.gz
+abbr tbz 'tar -xvjf' # extract .tar.bz2
+
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_ed25519.pub | xclip -selection clipboard | echo '=> Public key copied to pasteboard.'"
