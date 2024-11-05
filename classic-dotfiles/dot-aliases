@@ -85,11 +85,11 @@ alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
 alias untar='tar xvf'
 
 # copy current path to system clipboard
-abbr cwd "pwd | eval $CLIPBOARD"
+alias cwd="pwd | eval $CLIPBOARD"
 
 # archives
-abbr tgz 'tar -xvzf' # extract .tar.gz
-abbr tbz 'tar -xvjf' # extract .tar.bz2
+alias tgz='tar -xvzf' # extract .tar.gz
+alias tbz='tar -xvjf' # extract .tar.bz2
 
 
 # Pipe my public key to my clipboard.
