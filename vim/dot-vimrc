@@ -27,6 +27,10 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * silent! checktime
+
 set termguicolors
 
 " Cursor always stays 6 lines within viewable file when scrolling
@@ -42,6 +46,17 @@ set showcmd
 " Display wildmatches in status line
 set wildmenu
 
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
 " For regex in search, turn magic on
 set magic
 
@@ -53,8 +68,9 @@ set showmatch
 " for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
 highlight! link DiffText Todo
 
-" Sensible backspace
-set backspace=indent,eol,start
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
 " esc in insert & visual mode
 inoremap kj <esc>
@@ -66,3 +82,19 @@ vnoremap jk <esc>
 cnoremap jk <C-C>
 cnoremap kj <C-C>
 set timeoutlen=500
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l

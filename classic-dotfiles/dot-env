@@ -1,5 +1,6 @@
 # Common paths
 setenv WORKPLACE "~/workplace"
+setenv EDITOR "vim"
 
 # Sensible fzf defaults from fzf.fish
 # cycle allows jumping between the first and last results, making scrolling faster
