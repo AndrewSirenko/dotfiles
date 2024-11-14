@@ -58,8 +58,16 @@ HISTSIZE=10000
 SAVEHIST=1000000
 setopt SHARE_HISTORY # or INC_APPEND_HISTORY_TIME
 
+# Export vim as editor
+export EDITOR="vim"
+
 # Enter vim mode with <esc>
 set -o vi
+
+# Enable vim editing of cli command with vv
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'vv' edit-command-line
 
 # Source some zsh plugins
 eval "$(zoxide init zsh)"
@@ -165,7 +173,8 @@ function pr-peek() {
 }
 
 cdd() {
-  ssh cdd
+  ssh -XY cdd -Ct \
+     'sh -l -c "exec tmux new -CC -Asremote"'
 }
 
 cddd() {
