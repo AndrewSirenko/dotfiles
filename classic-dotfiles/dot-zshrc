@@ -46,6 +46,8 @@ else
 fi
 
 include "$HOME/.fzf.zsh"
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 zstyle ':completion:*' menu select
 # Powerlevel10k instant prompt.
 include "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -58,8 +60,13 @@ HISTSIZE=10000
 SAVEHIST=1000000
 setopt SHARE_HISTORY # or INC_APPEND_HISTORY_TIME
 
-# Export vim as editor
-export EDITOR="vim"
+# Export nvim/vim as editor
+if command -v "nvim" &> /dev/null
+then
+  export EDITOR="nvim"
+else
+  export EDITOR="vim"
+fi
 
 # Enter vim mode with <esc>
 set -o vi
@@ -171,6 +178,22 @@ function pr-peek() {
     gh pr comment "$pr_number" -b "/retest"
   fi
 }
+
+# cd from fzf directories in workplace
+fzfwd() {
+  cd $(fd --exclude ".git" --type d --max-depth 8 . "$HOME/workplace" | fzf)
+}
+
+# vim from fzf directories in workplace
+fzfwv() {
+  "$EDITOR" $(fd --exclude ".git" --type f --max-depth 8 . "$HOME/workplace" | fzf)
+}
+
+zle -N fzfwd
+bindkey '^w' fzfwd
+
+zle -N fzfwv
+bindkey '^v' fzfwv
 
 cdd() {
   ssh -XY cdd -Ct \

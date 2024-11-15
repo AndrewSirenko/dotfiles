@@ -37,7 +37,7 @@ alias gpo='git push origin'
 
 # Common
 alias g='grep'
-alias v='nvim'
+alias v="$EDITOR"
 
 # Kubernetes
 alias kg='kubectl get'
@@ -56,6 +56,9 @@ alias ksd='kubectl --namespace kube-system describe'
 # cd improvements
 alias cdr='cd $(git rev-parse --show-toplevel)'
 alias cdw='cd $HOME/workplace'
+
+# Useful
+alias sz='source $HOME/.zshrc'
 
 ### From @jessfraz/dotfiles
 # IP addresses
