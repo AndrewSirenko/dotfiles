@@ -1,6 +1,7 @@
 # Common paths
-setenv WORKPLACE "~/workplace"
+setenv WORKPLACE "$HOME/workplace"
 setenv EDITOR "vim"
+setenv XDG_CONFIG_HOME "$HOME/.config"
 
 # Sensible fzf defaults from fzf.fish
 # cycle allows jumping between the first and last results, making scrolling faster

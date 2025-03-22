@@ -45,11 +45,7 @@ brew 'noahgorstein/tap/jqp'
 brew 'xh'
 
 # Git extensions
-brew 'git-extras'
 brew 'git-lfs'
-brew 'git-absorb'
-brew 'git-branchless'
-brew 'lazygit'
 
 # Github
 brew 'gh'
@@ -72,7 +68,6 @@ brew 'nmap'
 brew 'net-tools'
 
 # Containers-related
-brew 'arkade'
 brew 'docker'
 brew 'stern'
 brew 'eksctl'
