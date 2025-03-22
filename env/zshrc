@@ -13,6 +13,23 @@ include "$HOME/.config/local-configs/local.zsh"
 # Aliases
 include "$HOME/.aliases"
 
+## Env vars
+# Common paths
+export WORKPLACE="$HOME/workplace"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Sensible fzf defaults from fzf.fish
+# cycle allows jumping between the first and last results, making scrolling faster
+# layout=reverse lists results top to bottom, mimicking the familiar layouts of git log, history, and env
+# border shows where the fzf window begins and ends
+# height=90% leaves space to see the current command and some scrollback, maintaining context of work
+# preview-window=wrap wraps long lines in the preview window, making reading easier
+# marker=* makes the multi-select marker more distinguishable from the pointer (since both default to >)
+export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
+
+# Default fzf to be fd
+export FZF_DEFAULT_COMMAND="fd . $WORKPLACE"
+
 # Case insensitive completions
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit

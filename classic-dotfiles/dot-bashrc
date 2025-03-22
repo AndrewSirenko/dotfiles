@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Simple .bashrc file. Should be sourced in .zshrc
-
-# Import my shell-agnostic default environment variables file
-function setenv() { export "$1=$2"; }
-. $HOME/.env
-
-[ -f $HOME/.fzf.bash ] && source "$HOME/.fzf.bash"
