@@ -17,6 +17,9 @@
 [branch]
     sort = -committerdate
 
+[column]
+  ui = auto
+
 [commit]
     # See diffs when editing commit message
 	verbose = true
@@ -30,19 +33,26 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [diff]
-    colorMoved = default
+    colorMoved = plain
+    mnemonicPrefix = true
     diff-algorithm = histogram
+    renames = true
 
 [fetch]
     # cleanup method that deletes outdated remote references in your .git directory
     prune = true
     recurseSubmodules = on-demand
+    pruneTags = true
+    all = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[help]
+  autocorrect = immediate
 
 [include]
     # TODO include workplace-level-config
@@ -70,6 +80,15 @@
 [rerere]
     # Auto fix merge conflicts that git has seen locally
 	enabled = true
+  autoupdate=true
+
+[tag]
+  sort = version:refname
+
+[stash]
+  autoSquash = true
+  updateRefs = true
+  autoStash = true
 
 [user]
     # TODO override this in system gitconfig, see [Different Git configuration for projects](https://stackoverflow.com/questions/8801729/is-it-possible-to-have-different-git-configuration-for-different-projects)
