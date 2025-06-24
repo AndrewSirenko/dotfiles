@@ -33,6 +33,7 @@ brew install 'zsh-autosuggestions'
 brew install 'zsh-syntax-highlighting'
 brew install 'olets/tap/zsh-abbr'
 brew install 'zoxide'
+brew install 'powerlevel10k'
 
 # Git extensions
 brew install 'git-lfs'
