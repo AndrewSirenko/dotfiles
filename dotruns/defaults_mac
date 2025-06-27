@@ -1,0 +1,2 @@
+defaults export com.googlecode.iterm2 ~/workplace/dotfiles/defaults/iterm2-settings-backup$RANDOM.plist
+defaults import com.googlecode.iterm2 ~/workplace/dotfiles/defaults/iterm2-settings.plist
