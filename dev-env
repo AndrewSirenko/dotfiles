@@ -73,3 +73,6 @@ move_file $DEV_ENV/env/gitconfig $HOME/.gitconfig
 move_file $DEV_ENV/env/gitignore_global $HOME/.gitignore_global
 move_file $DEV_ENV/env/p10k.zsh $HOME/.p10k.zsh
 move_file $DEV_ENV/env/aliases $HOME/.aliases
+
+# Claude Code settings
+move_dir $DEV_ENV/env/.claude $HOME/.claude
