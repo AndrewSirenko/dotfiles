@@ -8,8 +8,10 @@ include () {
     [[ -r "$1" ]] && source "$1"
 }
 
-# Local config
-include "$HOME/.config/local-configs/local.zsh"
+# Local configs (sourced from a separate internal repo)
+for f in "$HOME/.config/local-configs/"*.zsh; do
+    include "$f"
+done
 # Aliases
 include "$HOME/.aliases"
 
