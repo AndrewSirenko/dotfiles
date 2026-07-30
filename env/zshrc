@@ -9,9 +9,8 @@ include () {
 }
 
 # Local configs (sourced from a separate internal repo)
-for f in "$HOME/.config/local-configs/"*.zsh; do
-    include "$f"
-done
+include "$HOME/.config/local-configs/config.zsh"
+
 # Aliases
 include "$HOME/.aliases"
 
@@ -19,6 +18,32 @@ include "$HOME/.aliases"
 # Common paths
 export WORKPLACE="$HOME/workplace"
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# Ensure that command history is shared across panes
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Misc Aliases
+alias beks="aws eks --endpoint https://api.beta.us-west-2.wesley.amazonaws.com"
+alias st='stern'
+alias sts='aws sts get-caller-identity | jq -r ".Account"'
+
+# AWS CLI Command Completion
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
+compinit -C
+complete -C '/home/linuxbrew/.linuxbrew/bin/aws_completer' aws
+
+source <(kubectl completion zsh)
 
 # Sensible fzf defaults from fzf.fish
 # cycle allows jumping between the first and last results, making scrolling faster
