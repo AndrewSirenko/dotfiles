@@ -73,6 +73,7 @@ source <(fzf --zsh)
 # Sensible fzf defaults
 export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
 export FZF_DEFAULT_COMMAND="fd . $WORKPLACE"
+export FZF_ALT_C_COMMAND="fd --type d --max-depth 5"
 
 ### Settings
 
@@ -104,6 +105,9 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 ### Functions
+
+# Seed zoxide with workspace directories
+alias zseed='fd --type d --min-depth 1 --max-depth 3 . ~/workplace | xargs -I{} zoxide add {}'
 
 # Ignore dollar signs when pasting
 function \$ { "$@"; }
