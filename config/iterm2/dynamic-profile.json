@@ -2,13 +2,13 @@
   "Profiles" : [
     {
       "Use Separate Colors for Light and Dark Mode" : true,
-      "Name" : "Default",
       "Rewritable" : true,
+      "Name" : "Default",
       "Guid" : "624F3FFA-14BA-408F-BF4C-51522203CF2B"
     },
     {
+      "HotKey Modifier Flags" : 262144,
       "HotKey Characters" : "\t",
-      "Use Separate Colors for Light and Dark Mode" : true,
       "Rewritable" : true,
       "Command" : "ssh -t dsk 'tmux -CC new -A -s main'",
       "Window Type" : 5,
@@ -20,7 +20,7 @@
         "remote"
       ],
       "Custom Command" : "Yes",
-      "HotKey Modifier Flags" : 262144
+      "Use Separate Colors for Light and Dark Mode" : true
     }
   ]
 }
