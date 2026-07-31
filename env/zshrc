@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
+# Powerlevel10k instant prompt (must be near top, before any output)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ### Includes, pre-start hooks, sources
 
 # Include helper fcn
-## TODO append failed statements to some zshrc.errors log?
 include () {
     [[ -r "$1" ]] && source "$1"
 }
@@ -15,77 +19,48 @@ include "$HOME/.config/local-configs/config.zsh"
 include "$HOME/.aliases"
 
 ## Env vars
-# Common paths
 export WORKPLACE="$HOME/workplace"
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Ensure that command history is shared across panes
+# History
 HISTFILE=~/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Misc Aliases
-alias beks="aws eks --endpoint https://api.beta.us-west-2.wesley.amazonaws.com"
-alias st='stern'
-alias sts='aws sts get-caller-identity | jq -r ".Account"'
-
-# AWS CLI Command Completion
+# Completions (once)
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
     compinit
 done
 compinit -C
-complete -C '/home/linuxbrew/.linuxbrew/bin/aws_completer' aws
-
-source <(kubectl completion zsh)
-
-# Sensible fzf defaults from fzf.fish
-# cycle allows jumping between the first and last results, making scrolling faster
-# layout=reverse lists results top to bottom, mimicking the familiar layouts of git log, history, and env
-# border shows where the fzf window begins and ends
-# height=90% leaves space to see the current command and some scrollback, maintaining context of work
-# preview-window=wrap wraps long lines in the preview window, making reading easier
-# marker=* makes the multi-select marker more distinguishable from the pointer (since both default to >)
-export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
-
-# Default fzf to be fd
-export FZF_DEFAULT_COMMAND="fd . $WORKPLACE"
-
-# Case insensitive completions
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
+
+# Misc Aliases
+alias beks="aws eks --endpoint https://api.beta.us-west-2.wesley.amazonaws.com"
+alias st='stern'
+alias sts='aws sts get-caller-identity | jq -r ".Account"'
 
 #Plugins (brew vs manually installed)
-
-# Completions
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
-
-# If brew installed
 if command -v brew &> /dev/null
 then
   BREWPREFIX=$(brew --prefix)
-  # zsh plugins
   source "$BREWPREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   source "$BREWPREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   source "$BREWPREFIX/share/zsh-abbr/zsh-abbr.zsh"
 
-  # Prefer gnu versions over free-bsd versions on mac (e.g. sed)
+  # Prefer gnu versions over free-bsd versions on mac
   PATH="$BREWPREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 
-  # aws completions and on-partial auto-prompt
+  # aws completions
   complete -C "$BREWPREFIX/bin/aws_completer" aws
 
   # kubectl completions
   source <(kubectl completion zsh)
-
 else
   include "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
   include "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -93,19 +68,13 @@ else
 fi
 
 include "$HOME/.fzf.zsh"
-# Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
-zstyle ':completion:*' menu select
-# Powerlevel10k instant prompt.
-include "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+
+# Sensible fzf defaults
+export FZF_DEFAULT_OPTS='--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*"'
+export FZF_DEFAULT_COMMAND="fd . $WORKPLACE"
 
 ### Settings
-
-# from: https://unix.stackexchange.com/questions/389881/history-isnt-preserved-in-zsh
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=1000000
-setopt SHARE_HISTORY # or INC_APPEND_HISTORY_TIME
 
 # Export nvim/vim as editor
 if command -v "nvim" &> /dev/null
@@ -125,10 +94,6 @@ bindkey -M vicmd 'vv' edit-command-line
 
 # Source some zsh plugins
 eval "$(zoxide init zsh)"
-
-### Exports
-
-export XDG_CONFIG_HOME="$HOME/.config"
 
 ### Paths
 
@@ -152,17 +117,17 @@ function aar() {
 }
 
 # Aws unset env vars (If I'm doing role shenanigans)
- function auenv() {
-	unset AWS_DEFAULT_PROFILE
-    unset AWS_DEFAULT_REGION
-    unset AWS_PROFILE
-    unset AWS_REGION
-    unset AWS_ACCESS_KEY_ID
-    unset AWS_SECRET_ACCESS_KEY
-    unset AWS_SESSION_TOKEN
+function auenv() {
+  unset AWS_DEFAULT_PROFILE
+  unset AWS_DEFAULT_REGION
+  unset AWS_PROFILE
+  unset AWS_REGION
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
 }
 
-# fzf and python venv activation (https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/)
+# fzf and python venv activation
 function activate-venv() {
   local selected_env
   selected_env=$(ls ~/.venv/ | fzf)
@@ -172,7 +137,7 @@ function activate-venv() {
   fi
 }
 
-# fzf and git branch deletion (https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/)
+# fzf and git branch deletion
 function delete-branches() {
   git branch |
     grep --invert-match '\*' |
@@ -185,7 +150,7 @@ function mbr() {
   git branch -l main master mainline --format '%(refname:short)'
 }
 
-# checkout gh pr (https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/)
+# checkout gh pr
 function pr-checkout() {
   local jq_template pr_number
 
@@ -329,11 +294,10 @@ function manpdf() {
 }
 
 # Change working directory to the top-most Finder window location
-function cdf() { # short for `cdfinder`
+function cdf() {
 	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
-
